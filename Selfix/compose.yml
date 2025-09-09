@@ -1,0 +1,57 @@
+networks:
+  selfix-net:
+    name: selfix-net
+
+services:
+  selfix-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: selfix-app
+    container_name: selfix-app
+    networks:
+      - selfix-net
+    environment:
+      - DOTNET_ENVIRONMENT=${DOTNET_ENVIRONMENT:-Local}
+      # Database settings
+      - Database__ConnectionString=${DB_CONNECTION_STRING:-}
+      # Administration settings
+      # - Administration__AdminUsersIds__0=${ADMIN_USER_ID_1:-}
+      # Notifications settings
+      - Notifications__DbConnectionString=${NOTIFICATIONS_DB_CONNECTION_STRING:-}
+      # Asset URLs
+      - Assets__Images__PreviewImageUrl=${PREVIEW_IMAGE_URL:-https://selfix-assets.s3.gis-1.storage.selcloud.ru/selfix-assets/preview.png}
+      - Assets__Images__ConvertImageUrl=${CONVERT_IMAGE_URL:-https://selfix-assets.s3.gis-1.storage.selcloud.ru/selfix-assets/convert.png}
+      - Assets__Images__PromptImageUrl=${PROMPT_IMAGE_URL:-https://selfix-assets.s3.gis-1.storage.selcloud.ru/selfix-assets/prompt.png}
+      - Assets__Images__TutorialImageUrl=${TUTORIAL_IMAGE_URL:-https://selfix-assets.s3.gis-1.storage.selcloud.ru/selfix-assets/tutorial.png}
+      - Assets__Images__Price1ImageUrl=${PRICE1_IMAGE_URL:-https://selfix-assets.s3.gis-1.storage.selcloud.ru/selfix-assets/price1.png}
+      - Assets__Images__Price2ImageUrl=${PRICE2_IMAGE_URL:-https://selfix-assets.s3.gis-1.storage.selcloud.ru/selfix-assets/price2.png}
+      # Event streaming settings
+      - EventStreaming__KafkaBootstrapServers=${KAFKA_BOOTSTRAP_SERVERS:-broker:29092}
+      - EventStreaming__ConsumerGroupId=${KAFKA_GROUP_ID:-selfix}
+      - EventStreaming__CreateAvatarRequestsTopicName=${CREATE_AVATAR_REQUESTS_TOPIC:-selfix.avatar.create.requests}
+      - EventStreaming__CreateAvatarResponsesTopicName=${CREATE_AVATAR_RESPONSES_TOPIC:-selfix.avatar.create.responses}
+      - EventStreaming__ProcessPromptRequestsTopicName=${PROCESS_PROMPT_REQUESTS_TOPIC:-selfix.prompt.process.requests}
+      - EventStreaming__ProcessPromptResponsesTopicName=${PROCESS_PROMPT_RESPONSES_TOPIC:-selfix.prompt.process.responses}
+      - EventStreaming__GenerateImageRequestsTopicName=${GENERATE_IMAGE_REQUESTS_TOPIC:-selfix.image.generate.requests}
+      - EventStreaming__GenerateImageResponsesTopicName=${GENERATE_IMAGE_RESPONSES_TOPIC:-selfix.image.generate.responses}
+      - EventStreaming__KafkaUsername=${KAFKA_USERNAME:-}
+      - EventStreaming__KafkaPassword=${KAFKA_PASSWORD:-}
+      - EventStreaming__KafkaSaslMechanism=${KAFKA_SASL_MECHANISM:-Plain}
+      - EventStreaming__KafkaSecurityProtocol=${KAFKA_SECURITY_PROTOCOL:-Plaintext}
+      # Object storage settings
+      - ObjectStorage__AccessKey=${S3_ACCESS_KEY:-}
+      - ObjectStorage__SecretKey=${S3_SECRET_KEY:-}
+      - ObjectStorage__Region=${S3_REGION:-gis-1}
+      - ObjectStorage__Endpoint=${S3_ENDPOINT:-https://s3.gis-1.storage.selcloud.ru}
+      - ObjectStorage__ImagesBucketName=${S3_IMAGES_BUCKET:-selfix-images}
+      - ObjectStorage__AvatarsBucketName=${S3_AVATARS_BUCKET:-selfix-avatars}
+      - ObjectStorage__TemporaryBucketName=${S3_TEMP_BUCKET:-selfix-temp}
+      # Telegram bot settings
+      - TelegramBot__Token=${TELEGRAM_BOT_TOKEN:-}
+      - TelegramBot__TelegramBotUrl=${TELEGRAM_BOT_URL:-https://t.me/selfixaibetabot}
+      - TelegramBot__HelpAccountUrl=${TELEGRAM_HELP_URL:-https://t.me/selfixai_support}
+      - TelegramBot__Payments__YooKassa__PaymentProviderToken=${PAYMENT_PROVIDER_TOKEN:-}
+      # Serilog settings
+      - Serilog__MinimumLevel__Default=${LOG_MIN_LEVEL:-Debug}
+    restart: unless-stopped

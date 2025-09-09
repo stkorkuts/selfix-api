@@ -1,0 +1,3 @@
+namespace Selfix.Application.UseCases.Telegram.Images.GenerateByPredefinedPrompt;
+
+public sealed record ProcessPredefinedPromptResponse;

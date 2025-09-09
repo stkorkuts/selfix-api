@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AnalysisLevel>latest-recommended</AnalysisLevel>
+        <NoWarn>CA1716,CA1859,CA1711,CA1707,CA1000</NoWarn>
+    </PropertyGroup>
+
+</Project>

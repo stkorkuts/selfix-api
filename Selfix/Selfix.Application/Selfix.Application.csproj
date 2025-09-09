@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AnalysisLevel>latest-recommended</AnalysisLevel>
+        <NoWarn>CA1716,CA1859,CA1711,CA1707,CA1000,CA2201</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Selfix.Domain\Selfix.Domain.csproj" />
+        <ProjectReference Include="..\Selfix.Shared\Selfix.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="UseCases\Notifications\" />
+        <Folder Include="UseCases\Telegram\Products\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+            <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\9.0.1\lib\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+</Project>

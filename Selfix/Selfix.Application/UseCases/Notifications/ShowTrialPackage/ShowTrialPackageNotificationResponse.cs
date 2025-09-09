@@ -1,0 +1,3 @@
+namespace Selfix.Application.UseCases.Notifications.ShowTrialPackage;
+
+public sealed record ShowTrialPackageNotificationResponse;

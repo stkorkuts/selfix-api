@@ -1,0 +1,3 @@
+namespace Selfix.Application.UseCases.Jobs.PromptProcessing;
+
+public sealed record HandlePromptProcessingResultResponse;

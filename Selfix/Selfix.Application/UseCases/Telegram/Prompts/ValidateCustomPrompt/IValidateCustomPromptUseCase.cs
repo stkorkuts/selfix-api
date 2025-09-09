@@ -1,0 +1,3 @@
+namespace Selfix.Application.UseCases.Telegram.Prompts.ValidateCustomPrompt;
+
+public interface IValidateCustomPromptUseCase : IUseCase<ValidateCustomPromptRequest, ValidateCustomPromptResponse>;
